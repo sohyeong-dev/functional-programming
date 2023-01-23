@@ -1,0 +1,27 @@
+{
+  "name": "functional-progamming",
+  "version": "0.0.1",
+  "description": "함수형 프로그래밍",
+  "main": "app.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sohyeong-dev/functional-programming.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sohyeong-dev/functional-programming/issues"
+  },
+  "homepage": "https://github.com/sohyeong-dev/functional-programming#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.15",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

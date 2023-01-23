@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { map, pipe, entries, isString } from "@fxts/core";
+import { filter, map, pipe, entries, isString, isArray, toArray } from "@fxts/core";
 import { ParsedQs } from "qs";
 
 const SQL_INJECTION_CHARS_REGEXP =
@@ -24,6 +24,15 @@ const filterSqlInjectionChars = function recur (value: QueryStringValue): QueryS
         return str
       }
     )
+  }
+
+  if (isArray(value)) {
+    return pipe(
+      value,
+      filter(isString),
+      map(recur),
+      toArray
+    ) as unknown as QueryStringValue
   }
   
   return value

@@ -7,13 +7,23 @@ const SQL_INJECTION_CHARS_REGEXP =
 
 type QueryStringValue = string | ParsedQs | string[] | ParsedQs[] | undefined
 
-const filterSqlInjectionChars = function (value: QueryStringValue): QueryStringValue {
+const filterSqlInjectionChars = function recur (value: QueryStringValue): QueryStringValue {
   if (value === undefined) {
     return
   }
 
   if (isString(value)) {
-    return value.replace(SQL_INJECTION_CHARS_REGEXP, '')
+    return pipe(
+      value,
+      str => str.replace(SQL_INJECTION_CHARS_REGEXP, ''),
+      str => {
+        if (SQL_INJECTION_CHARS_REGEXP.test(str)) {
+          return recur(str)
+        }
+
+        return str
+      }
+    )
   }
   
   return value
